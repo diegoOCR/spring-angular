@@ -1,0 +1,66 @@
+<div id="contentToConvert" class="card bg-light" *ngIf="factura">
+  <div class="card-header">{{'Factura' | translate}}: {{factura.descripcion}}</div>
+  <div class="card-body">
+    <h4 class="card-title">
+      <a [routerLink]="['/clientes']" class="btn btn-light btn-xs" style="border: 1px solid rgba(0,0,0,.125); background-color: rgba(0,0,0,.03)">&laquo; {{'volver' | translate}}</a>
+      <button class="btn btn-primary float-right" role="button" (click)='downloadPDF()'>{{'Descargar PDF' | translate}}</button>
+    </h4>
+
+    <ul class="list-group my-2">
+      <li class="list-group-item list-group-item-primary" id="li-title">{{'Datos del cliente' | translate}}</li>
+      <li class="list-group-item">{{factura.cliente.nombre}}</li>
+      <li class="list-group-item">{{factura.cliente.apellido}}</li>
+    </ul>
+
+    <ul class="list-group my-2">
+      <li class="list-group-item list-group-item-primary" id="li-invoice">{{'Datos de la factura' | translate}}</li>
+      <li class="list-group-item">{{'Folio' | translate}}: {{factura.id}}</li>
+      <li class="list-group-item">{{'Descripción' | translate}}: {{factura.descripcion}}</li>
+      <li class="list-group-item">{{'Fecha' | translate}}: {{factura.createAt}}</li>
+    </ul>
+
+
+
+    <table class="table table-striped table-hover table-bordered my-3" id="table">
+      <thead>
+        <tr>
+          <th id="th-Producto">{{'Producto' | translate}}</th>
+          <th id="th-Cantidad">{{'Cantidad' | translate}}</th>
+          <th id="th-Precio">{{'Precio' | translate}}</th>
+          <th id="th-Total">{{'Total' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of factura.items">
+          <td>{{item.producto.nombre}}</td>
+          <td>{{item.cantidad}}</td>
+          <td>{{item.producto.precio}}</td>
+          <td>{{item.importe}}</td>
+        </tr>
+      </tbody>
+
+    </table>
+    
+    <div class="p-3 mb-2 text-dark border-top border-bottom font-weight-bold">
+      <div class="row justify-content-end">
+        <div class="col-2" style="padding-left: 56px; max-width: 100%;" id="gran-total-titulo">
+          {{'Gran Total' | translate}}
+        </div>
+        <div class="col-2" style="padding-left: 28px;  max-width: 100%;" id="gran-total">
+          {{factura.total}}
+        </div>
+      </div>
+    </div>
+
+    <div class="card border-info mb-4" style="max-width: 350px;">
+      <div class="card card-header" id="observaciones">
+        {{'Observaciones' | translate}}
+      </div>
+      <div class="card card-body">
+        <p *ngIf="!factura.observacion" id="observaciones-contenido">{{'No tiene observación' | translate}}</p>
+        <p *ngIf="factura.observacion">{{factura.observacion}}</p>
+      </div>
+    </div>
+
+  </div>
+</div>

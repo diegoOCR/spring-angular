@@ -1,0 +1,103 @@
+<form class="border border-light p-5" #signupForm="ngForm" id="signupForm" style="width: 600px;">
+
+    <p class="h4 mb-4">{{tituloSignup | translate}}</p>
+
+
+            <!-- First name -->
+            <input id="form_name" type="text" name="nombre" class="form-control" [(ngModel)]="usuario.nombre" placeholder="{{'Nombre' | translate}} *" required minlength="4" #nombre="ngModel">
+            <div class="alert1 alert-danger1" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched) || nombre.invalid && signupForm.submitted">
+              <div *ngIf="nombre.errors.required">
+                {{'Nombre es requerido' | translate}}
+              </div>
+              <div *ngIf="nombre.errors.minlength">
+                {{'Nombre debe tener al menos 4 caracteres' | translate}}
+              </div>
+            </div>
+            <br>
+
+
+            <input type="text" class="form-control" [(ngModel)]="usuario.apellido" placeholder="{{'Apellido' | translate}} *" name="apellido" required #apellido="ngModel"> <!-- required -->
+            <div class="alert1 alert-danger1" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched) || apellido.invalid && signupForm.submitted">
+              <div *ngIf="apellido.errors.required">
+                {{'Apellido es requerido' | translate}}
+              </div>
+            </div>
+
+            <br>
+
+
+
+        <!-- Last name -->
+        <input type="text" class="form-control" [(ngModel)]="usuario.username" placeholder="{{'Usuario' | translate}} *" name="username" required #username="ngModel"> <!-- required -->
+        <div class="alert1 alert-danger1" *ngIf="username.invalid && (username.dirty || username.touched) || username.invalid && signupForm.submitted">
+          <div *ngIf="username.errors.required">
+            {{'Usuario es requerido' | translate}}
+          </div>
+        </div>
+
+
+    <br>
+
+    <!-- E-mail -->
+    <input type="email" class="form-control" [(ngModel)]="usuario.email" placeholder="{{'Email' | translate}} *" name="email" required email #email="ngModel"> <!-- required email -->
+    <div class="alert1 alert-danger1" *ngIf="email.invalid && (email.dirty || email.touched) || email.invalid && signupForm.submitted">
+      <div *ngIf="email.errors.required">
+        {{'Email es requerido' | translate}}
+      </div>
+      <div *ngIf="email.errors.email">
+        {{'Email debe tener un formato válido' | translate}}
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Password -->
+    <input type="password" class="form-control" [(ngModel)]="usuario.password" placeholder="{{'Password' | translate}} *" name="password" required #password="ngModel"> <!-- required -->
+    <div class="alert1 alert-danger1" *ngIf="password.invalid && (password.dirty || password.touched) || password.invalid && signupForm.submitted">
+      <div *ngIf="password.errors.required">
+        {{'contraseña es requerida' | translate}}
+      </div>
+    </div>
+
+    <!-- <br>
+
+    <input type="password" class="form-control" [(ngModel)]="usuario.username" placeholder="{{'Repetir password' | translate}} *" name="passwordRepeat" required #passwordRepeat="ngModel">
+    <div class="alert1 alert-danger1" *ngIf="passwordRepeat.invalid && (passwordRepeat.dirty || passwordRepeat.touched) || passwordRepeat.invalid && signupForm.submitted">
+      <div *ngIf="passwordRepeat.errors.required">
+        {{'contraseña es requerida' | translate}}
+      </div>
+    </div> -->
+
+
+    <!-- <br>
+    <input type="submit" class="btn btn-success btn-send" (click)='create()' value="{{'Crear usuario' | translate}}"> -->
+
+    <br>
+
+
+    <div class="form-group" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <select id="form_need" name="roles" class="form-control" [(ngModel)]="usuarioRol.role_id" required #roles="ngModel">
+            <option [ngValue]="undefined">--- {{'selecciona un rol' | translate}} * ---</option>
+            <option value="1">{{'admin' | translate}}</option>
+            <option value="2">{{'user' | translate}}</option>
+        </select>
+        <div class="alert1 alert-danger1" *ngIf="roles.invalid && (roles.dirty || roles.touched) || roles.invalid && signupForm.submitted">
+          <div *ngIf="roles.errors.required">
+            {{'Motivo es requerido' | translate}}
+          </div>
+        </div>
+    </div>
+
+  <br>
+
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!usuario.id else elseBlock">{{'Crear usuario' | translate}}</button> <!--[disabled]="!clienteForm.form.valid"-->
+
+        <ng-template #elseBlock>
+          <button class="btn btn-primary" role="button" (click)='update()'>{{'Editar usuario' | translate}}</button> <!--[disabled]="!clienteForm.form.valid"-->
+        </ng-template>
+      </div>
+    </div>
+
+</form>

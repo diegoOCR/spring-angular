@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "spring-angular-mysql",
+    "spring-angular-mysql": "spring-angular-mysql"
+  }
+}

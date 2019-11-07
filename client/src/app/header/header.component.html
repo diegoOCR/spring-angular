@@ -1,0 +1,97 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="['/home']"> {{ title }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/home']">{{'Home' | translate}}</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/clientes']">{{'Clientes' | translate}}</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/chat">{{'Chat' | translate}}</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/contacto">{{'Contacto' | translate}}</a>
+      </li>
+      <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/usuarios">{{'Usuarios' | translate}}</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav navbar-right mx-4" >
+					<li class="nav-item mx-1"><a class="btn btn-outline-success text-success" (click)="cambiarLenguaje('es')">ES</a></li>
+					<li class="nav-item mx-1"><a class="btn btn-outline-success text-success" (click)="cambiarLenguaje('en')">EN</a></li>
+					<li class="nav-item mx-1"><a class="btn btn-outline-success text-success" (click)="cambiarLenguaje('de')">DE</a></li>
+		</ul>
+    <!-- <ul class="navbar-nav navbar-right" *ngIf="router.url !== '/login'"> -->
+    <ul class="navbar-nav navbar-right" *ngIf="hideLogIn()">
+
+    <!-- <ul class="navbar-nav navbar-right mx-4" >
+      <li class="nav-item mx-1" *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/signup']" class="btn btn-outline-primary">{{'Registrarse' | translate}}</a></li>
+      <li class="nav-item mx-1" *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/login']" class="btn btn-outline-primary">{{'Identificarse' | translate}}</a></li>
+    </ul> -->
+
+    <ul class="navbar-nav navbar-right mx-4"  *ngIf="!authService.isAuthenticated()">
+        <!-- <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li> -->
+        <li class="nav-item mx-1" *ngIf="!authService.isAuthenticated()"><a [routerLink]="['/signup']" class="btn btn-outline-primary">{{'Registrarse' | translate}}</a></li>
+        <li class="nav-item mx-1 dropdown order-1">
+            <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle">{{'Login' | translate}}<span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-right mt-2" style="width: 250px;">
+               <li class="px-3 py-3">
+                   <form class="form" role="form">
+                        <div class="form-group">
+                          <input [(ngModel)]="usuario.username" type="text" class="form-control"
+                          name="username" id="username" placeholder="Username" autofocus required>
+                        </div>
+                        <div class="form-group">
+                          <input [(ngModel)]="usuario.password" type="password" class="form-control"
+                          name="password" id="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <input (click)='login()' type="submit" class="btn btn-lg btn-primary btn-block" value="{{'Log In' | translate}}">
+                        </div>
+
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+
+
+    <ul class="nav navbar-nav flex-row justify-content-between ml-auto"  *ngIf="authService.isAuthenticated()">
+        <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+        <li class="dropdown order-1">
+            <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle">{{authService.usuario.username}}</button>
+            <ul class="dropdown-menu dropdown-menu-right mt-2">
+               <li class="px-2 py-1">
+                   <form class="form" role="form">
+
+                        <div class="form-group">
+                            <input (click)='logout()' type="submit" class="btn btn-secundary btn-block" value="{{'Cerrar sesión' | translate}}">
+                        </div>
+
+                    </form>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+      <!-- <li *ngIf="authService.isAuthenticated()" class="dropdown ">
+        <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{authService.usuario.username}}
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" style="width: 50px !important;">
+           <button (click)="logout()" class="dropdown-item" type="submit">{{'Cerrar sesión' | translate}}</button>
+        </div>
+      </li> -->
+    </ul>
+
+  </div>
+</nav>
