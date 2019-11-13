@@ -70,12 +70,12 @@ public class ContactoRestController {
 	}
 	
 	
-	//@Secured({"ROLE_ADMIN", "ROLE_USER"})
+//	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	@PostMapping("/email")
-	public ResponseEntity<Contacto> enviarEmail(@Valid @RequestBody Contacto email) {
+	public ResponseEntity<Contacto> enviarEmail(@Valid @RequestBody Contacto contacto) {
 		try {
-			envioEmail.sendEmail(email);
-			return new ResponseEntity<>(email, HttpStatus.OK);
+			envioEmail.sendEmail(contacto);
+			return new ResponseEntity<>(contacto, HttpStatus.OK);
 		} catch (MailException e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

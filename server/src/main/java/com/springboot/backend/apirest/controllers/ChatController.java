@@ -36,7 +36,7 @@ public class ChatController {
 		
 		if(mensaje.getTipo().equals("NUEVO_USUARIO")) {
 			mensaje.setColor(colores[new Random().nextInt(colores.length)]);
-			mensaje.setTexto("nuevo usuario");
+			mensaje.setTexto("new user");
 		}else {
 			chatService.guardar(mensaje);
 		}
@@ -48,7 +48,7 @@ public class ChatController {
 	@MessageMapping("/escribiendo")
 	@SendTo("/chat/escribiendo")
 	public String estaEscribiendo(String username) {
-		return username.concat(" está escribiendo...");
+		return username.concat(" is writing...");
 	}
 	
 	

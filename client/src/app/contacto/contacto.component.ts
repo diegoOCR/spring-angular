@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Contacto } from './contacto';
 import { ContactoService } from './contacto.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Config } from '../config/config';
 
 import {formatDate } from '@angular/common';
 
@@ -25,9 +26,9 @@ export class ContactoComponent implements OnInit {
     today= new Date();
     jstoday = '';
 
-  constructor(private contactoService: ContactoService,
+  constructor(public contactoService: ContactoService,
     private router: Router,
-    public activatedRoute: ActivatedRoute) {
+    public activatedRoute: ActivatedRoute, private config: Config) {
       this.jstoday = formatDate(this.today, 'dd-MM-yyyy hh:mm:ss a', 'en-US', '+0530');
      }
 
@@ -35,6 +36,7 @@ export class ContactoComponent implements OnInit {
 
 
   ngOnInit() {
+    this.config.placeholder();
   }
 
 
@@ -49,7 +51,7 @@ export class ContactoComponent implements OnInit {
       .subscribe(
         contacto => {
           this.router.navigate(['/contacto']);
-          //(<HTMLFormElement>document.getElementById("contactoForm")).reset();
+          (<HTMLFormElement>document.getElementById("contactoForm")).reset();
           swal({
             title: 'Message sent',
             text: `Your message has been sent`,
@@ -66,7 +68,7 @@ export class ContactoComponent implements OnInit {
 
 
   sendEmail(): void {
-    console.log(this.contacto);
+    console.log(this.contacto.email);
     this.contactoService.sendEmail(this.contacto)
       .subscribe(
         contacto => {

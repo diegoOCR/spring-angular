@@ -39,7 +39,7 @@ import com.springboot.backend.apirest.models.entity.Region;
 import com.springboot.backend.apirest.models.services.IClienteService;
 import com.springboot.backend.apirest.models.services.IUploadFileService;
 
-@CrossOrigin(origins = {"http://localhost:4200", "*"})
+@CrossOrigin(origins = {"http://localhost:4200", "https://spring-angular-mysql.herokuapp.com", "*"})
 @RestController
 @RequestMapping("/api")
 public class ClienteRestController {
@@ -59,7 +59,7 @@ public class ClienteRestController {
 	 
 	@GetMapping("/clientes/page/{page}")
 	public Page<Cliente> index(@PathVariable Integer page) {
-		Pageable pageable = PageRequest.of(page, 4);
+		Pageable pageable = PageRequest.of(page, 7);
 		return clienteService.findAll(pageable);
 	}
 	

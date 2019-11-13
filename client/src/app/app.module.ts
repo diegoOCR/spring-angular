@@ -11,6 +11,7 @@ import { ClienteService } from './clientes/cliente.service';
 import { ContactoService } from './contacto/contacto.service';
 import { UsuarioService } from './usuarios/usuario.service';
 import { SignupService } from './usuarios/signup.service';
+import { Config } from './config/config';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -42,6 +43,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ChatComponent } from './chat/chat.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { HomeComponent } from './home/home.component';
+import { EmpleadoComponent } from './empleado/empleado.component';
+
 
 registerLocaleData(localeES, 'es');
 
@@ -60,7 +63,8 @@ const routes: Routes = [
   { path: 'facturas/form/:clienteId', component: FacturasComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
   { path: 'chat', component: ChatComponent },
   { path: 'contacto', component: ContactoComponent },
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'empleados', component: EmpleadoComponent }
 ];
 
 @NgModule({
@@ -80,7 +84,8 @@ const routes: Routes = [
     FacturasComponent,
     ChatComponent,
     ContactoComponent,
-    HomeComponent
+    HomeComponent,
+    EmpleadoComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +102,7 @@ const routes: Routes = [
       }
     })
   ],
-  providers: [ClienteService,ContactoService, UsuarioService, SignupService,
+  providers: [ClienteService,ContactoService, UsuarioService, SignupService, Config,
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],

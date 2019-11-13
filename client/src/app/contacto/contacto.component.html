@@ -1,88 +1,87 @@
 
 
-      <form class="border border-light p-5" #contactoForm="ngForm" id="contactoForm">
+      <form class="border border-light p-5" #contactoForm="ngForm" id="contactoForm" style="width: 650px;">
 
         <p class="h4 mb-4">{{'Formulario de contacto' | translate}}</p>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input id="form_name" type="text" name="nombre" class="form-control" [(ngModel)]="contacto.nombre" placeholder="{{'Ingresa tu nombre' | translate}} *" required minlength="4" #nombre="ngModel">
-                    <div class="alert1 alert-danger1" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched) || nombre.invalid && contactoForm.submitted">
-                      <div *ngIf="nombre.errors.required">
-                        {{'Nombre es requerido' | translate}}
-                      </div>
-                      <div *ngIf="nombre.errors.minlength">
-                        {{'Nombre debe tener al menos 4 caracteres' | translate}}
-                      </div>
-                    </div>
-                </div>
+            <div class="field-wrapper">
+                <input type="text" name="nombre" [(ngModel)]="contacto.nombre"  required minlength="4" #nombre="ngModel" >
+                <div class="field-placeholder"><span>{{'Nombre' | translate}} *</span></div>
             </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="text" class="form-control" [(ngModel)]="contacto.apellido" placeholder="{{'Ingresa tu apellido' | translate}} *" name="apellido" required #apellido="ngModel"> <!-- required -->
-                    <div class="alert1 alert-danger1" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched) || apellido.invalid && contactoForm.submitted">
-                      <div *ngIf="apellido.errors.required">
-                        {{'Apellido es requerido' | translate}}
-                      </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <input type="email" class="form-control" [(ngModel)]="contacto.email" placeholder="{{'Ingresa tu email' | translate}} *" name="email" required email #email="ngModel"> <!-- required email -->
-                    <div class="alert1 alert-danger1" *ngIf="email.invalid && (email.dirty || email.touched) || email.invalid && contactoForm.submitted">
-                      <div *ngIf="email.errors.required">
-                        {{'Email es requerido' | translate}}
-                      </div>
-                      <div *ngIf="email.errors.email">
-                        {{'Email debe tener un formato válido' | translate}}
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <select id="form_need" name="motivo" class="form-control" [(ngModel)]="contacto.motivo" required #motivo="ngModel">
-                        <option [ngValue]="undefined">--- {{'selecionar un motivo' | translate}} ---</option>
-                        <option>{{'Solicitar un cita' | translate}}</option>
-                        <option>{{'Solicitar estado del pedido' | translate}}</option>
-                        <option>{{'Solicitar una copia de factura' | translate}}</option>
-                        <option>{{'Otro' | translate}}</option>
-                    </select>
-                    <div class="alert1 alert-danger1" *ngIf="motivo.invalid && (motivo.dirty || motivo.touched) || motivo.invalid && contactoForm.submitted">
-                      <div *ngIf="motivo.errors.required">
-                        {{'Motivo es requerido' | translate}}
-                      </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <textarea id="form_message" name="message" class="form-control" [(ngModel)]="contacto.mensaje" placeholder="{{'Escribe tu mensaje' | translate}} *" rows="4" required #mensaje="ngModel"></textarea>
-                    <div class="alert1 alert-danger1" *ngIf="mensaje.invalid && (mensaje.dirty || mensaje.touched) || mensaje.invalid && contactoForm.submitted">
-                      <div *ngIf="mensaje.errors.required">
-                        {{'Mensaje es requerido' | translate}}
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <input type="submit" class="btn btn-success btn-send" (click)='create(); comparador()' value="{{'Enviar mensaje' | translate}}" >
-                <div class="form-check" style="margin-top: 17px;">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                  <label class="form-check-label" for="defaultCheck1">
-                    {{'Enviar una copia de este mensaje' | translate}}
-                  </label>
+            <div class=" alert1 alert-danger1" *ngIf="nombre.invalid && contactoForm.submitted">
+              <div *ngIf="nombre.errors.required">
+                {{'Nombre es requerido' | translate}}
+              </div>
+              <div *ngIf="nombre.errors.minlength">
+                {{'Nombre debe tener al menos 4 caracteres' | translate}}
               </div>
             </div>
-        </div>
+
+
+            <div class="field-wrapper">
+                <input type="text" [(ngModel)]="contacto.apellido" name="apellido" required #apellido="ngModel"> <!-- required -->
+                <div class="field-placeholder"><span>{{'Apellido' | translate}} *</span></div>
+            </div>
+            <div class="alert1 alert-danger1" *ngIf="apellido.invalid && contactoForm.submitted">
+              <div *ngIf="apellido.errors.required">
+                {{'Apellido es requerido' | translate}}
+              </div>
+            </div>
+
+
+
+            <div class="field-wrapper">
+                <input type="email" [(ngModel)]="contacto.email" name="email" required email #email="ngModel"> <!-- required email -->
+                <div class="field-placeholder"><span>{{'E-mail' | translate}} *</span></div>
+                </div>
+                <div class="alert1 alert-danger1" *ngIf="email.invalid && contactoForm.submitted">
+                  <div *ngIf="email.errors.required">
+                    {{'Email es requerido' | translate}}
+                  </div>
+                  <div *ngIf="email.errors.email">
+                    {{'Email debe tener un formato válido' | translate}}
+                  </div>
+                </div>
+
+
+
+            <div class="field-wrapper">
+                <select class="custom-select" name="motivo" [(ngModel)]="contacto.motivo" required #motivo="ngModel">
+                    <option [ngValue]="undefined">{{'Motivo' | translate}} *</option>
+                    <option>{{'Solicitar un cita' | translate}}</option>
+                    <option>{{'Solicitar estado del pedido' | translate}}</option>
+                    <option>{{'Solicitar una copia de factura' | translate}}</option>
+                    <option>{{'Otro' | translate}}</option>
+                </select>
+                <div class="alert2 alert-danger1" *ngIf="motivo.invalid && contactoForm.submitted">
+                  <div *ngIf="motivo.errors.required">
+                    {{'Motivo es requerido' | translate}}
+                  </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="field-wrapper">
+                <textarea id="form_message" name="message" class="form-control" [(ngModel)]="contacto.mensaje" placeholder="{{'Mensaje' | translate}} *" rows="4" required #mensaje="ngModel"></textarea>
+            </div>
+                <div class="alert1 alert-danger1" *ngIf="mensaje.invalid && contactoForm.submitted">
+                  <div *ngIf="mensaje.errors.required">
+                    {{'Mensaje es requerido' | translate}}
+                  </div>
+                </div>
+
+
+
+            <input type="submit" class="btn btn-success btn-send" (click)='comparador(); create()' value="{{'Enviar mensaje' | translate}}" >
+            <div class="form-check" style="margin-top: 17px;">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+              <label class="form-check-label" for="defaultCheck1">
+                {{'Enviar una copia de este mensaje' | translate}}
+              </label>
+          </div>
+
+
     </form>

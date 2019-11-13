@@ -35,7 +35,7 @@ public class Contacto implements Serializable {
 
 	@NotEmpty(message = "no puede estar vacío")
 	@Email(message = "no es una dirección de correo bien formada")
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String email;
 
 	@NotNull(message = "no puede estar vacío")

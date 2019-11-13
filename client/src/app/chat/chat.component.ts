@@ -3,12 +3,16 @@ import { Client } from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import { Mensaje } from './models/mensaje';
 
+import { URL_BACKEND } from '../config/config';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+
+  private urlEndPoint: string = URL_BACKEND + '/chat-websocket';
 
   private client: Client;
   conectado: boolean = false;
@@ -26,11 +30,11 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.client = new Client();
     this.client.webSocketFactory = () => {
-      return new SockJS('http://localhost:8080/chat-websocket');
+      return new SockJS(this.urlEndPoint);
     }
 
     this.client.onConnect = (frame) => {
-      console.log('Conectados: ' + this.client.connected + ' : ' + frame);
+      console.log('connected: ' + this.client.connected + ' : ' + frame);
       this.conectado = true;
 
       this.client.subscribe('/chat/mensaje', e => {
@@ -72,7 +76,7 @@ export class ChatComponent implements OnInit {
 
 
     this.client.onDisconnect = (frame) => {
-      console.log('Desconectados: ' + !this.client.connected + ' : ' + frame);
+      console.log('disconnected: ' + !this.client.connected + ' : ' + frame);
       this.conectado = false;
 
       this.mensaje = new Mensaje();

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpMethod;
+import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -14,10 +15,14 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
+import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
 @Configuration 
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+@EnableWebSocketMessageBroker
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter implements  WebSocketMessageBrokerConfigurer {
  
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
@@ -37,7 +42,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:4200/chat", "http://localhost:4200/chat-websocket/**", "*"));
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "https://spring-angular-mysql.web.app", "http://localhost:4200/chat", "https://spring-angular-mysql.web.app/chat", "http://localhost:4200/chat-websocket/**", "https://spring-angular-mysql.web.app/chat-websocket/**", "*"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
@@ -52,6 +57,21 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
+	}
+	
+	@Override
+	public void registerStompEndpoints(StompEndpointRegistry registry) {
+
+		registry.addEndpoint("/chat-websocket")
+		.setAllowedOrigins("http://localhost:4200", "https://spring-angular-mysql.web.app")
+		.withSockJS();
+	}
+
+	@Override
+	public void configureMessageBroker(MessageBrokerRegistry registry) {
+	
+		registry.enableSimpleBroker("/chat/");
+		registry.setApplicationDestinationPrefixes("/app");
 	}
 
 	
