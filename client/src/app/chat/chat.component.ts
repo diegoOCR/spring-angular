@@ -5,6 +5,8 @@ import { Mensaje } from './models/mensaje';
 
 import { URL_BACKEND } from '../config/config';
 
+import { Config } from '../config/config';
+
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -23,11 +25,12 @@ export class ChatComponent implements OnInit {
   escribiendo: string;
   clienteId: string;
 
-  constructor() {
+  constructor(private config: Config) {
     this.clienteId = 'id-' + new Date().getTime() + '-' + Math.random().toString(36).substr(2);
   }
 
   ngOnInit() {
+    this.config.placeholder();
     this.client = new Client();
     this.client.webSocketFactory = () => {
       return new SockJS(this.urlEndPoint);

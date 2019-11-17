@@ -1,5 +1,4 @@
 
-
       <form class="border border-light p-5" #contactoForm="ngForm" id="contactoForm" style="width: 650px;">
 
         <p class="h4 mb-4">{{'Formulario de contacto' | translate}}</p>
@@ -44,23 +43,15 @@
                 </div>
 
 
-
-            <div class="field-wrapper">
-                <select class="custom-select" name="motivo" [(ngModel)]="contacto.motivo" required #motivo="ngModel">
-                    <option [ngValue]="undefined">{{'Motivo' | translate}} *</option>
-                    <option>{{'Solicitar un cita' | translate}}</option>
-                    <option>{{'Solicitar estado del pedido' | translate}}</option>
-                    <option>{{'Solicitar una copia de factura' | translate}}</option>
-                    <option>{{'Otro' | translate}}</option>
-                </select>
-                <div class="alert2 alert-danger1" *ngIf="motivo.invalid && contactoForm.submitted">
-                  <div *ngIf="motivo.errors.required">
-                    {{'Motivo es requerido' | translate}}
-                  </div>
-                </div>
-            </div>
-
-
+            <mat-form-field>
+              <select matNativeControl class="custom-select" name="motivo" [(ngModel)]="contacto.motivo" required #motivo="ngModel">
+                <option [ngValue]="undefined">{{'Motivo' | translate}} *</option>
+                <option>{{'Solicitar un cita' | translate}}</option>
+                <option>{{'Solicitar estado del pedido' | translate}}</option>
+                <option>{{'Solicitar una copia de factura' | translate}}</option>
+                <option>{{'Otro' | translate}}</option>
+              </select>
+            </mat-form-field>
 
 
 

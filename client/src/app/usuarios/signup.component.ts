@@ -5,7 +5,7 @@ import { UsuarioService } from './usuario.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioRol } from './usuario-rol';
 import { AuthService } from '../usuarios/auth.service';
-
+import { Config } from '../config/config';
 
 
 import swal from 'sweetalert2';
@@ -23,21 +23,20 @@ export class SignupComponent implements OnInit {
 
     errores: string[];
 
-    tituloSignup: string = "Registrarse";
 
 
 
 
 
   constructor(public authService: AuthService, private usuarioService: UsuarioService, private signupService: SignupService,
-    private router: Router,
-    public activatedRoute: ActivatedRoute) {
-     }
+    private router: Router, public activatedRoute: ActivatedRoute, private config: Config) {
+  }
 
 
 
 
   ngOnInit() {
+    this.config.placeholder();
     this.activatedRoute.paramMap.subscribe(params => {
       let id = +params.get('id');
       if (id) {
@@ -94,7 +93,6 @@ export class SignupComponent implements OnInit {
 
 
     update(): void {
-      this.tituloSignup = "Editar";
       this.usuario.enabled = 1;
       console.log(this.usuario);
       this.signupService.update(this.usuario)

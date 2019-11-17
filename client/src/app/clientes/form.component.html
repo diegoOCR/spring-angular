@@ -5,7 +5,10 @@
 </ul> -->
 
 <div class="card bg-dark text-white">
-  <div class="card-header" translate>{{ 'Crear Cliente' | translate }}</div>
+  <div class="card-header" *ngIf="!cliente.id else elseBlockCrear">{{'Crear Cliente' | translate}}</div>
+  <ng-template #elseBlockCrear>
+    <div class="card-header">{{'Editar Cliente' | translate}}</div>
+  </ng-template>
   <div class="card-body">
 
     <form #clienteForm="ngForm">
@@ -13,7 +16,7 @@
         <label for="nombre" class="col-form-label col-sm-2">{{'Nombre' | translate}}</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="cliente.nombre" name="nombre" required minlength="4" #nombre="ngModel"> <!-- required minlength="4" -->
-          <div class="alert1 alert-danger1" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched) || nombre.invalid && clienteForm.submitted">
+          <div class="alert1 alert-danger1" *ngIf="nombre.invalid && clienteForm.submitted">
             <div *ngIf="nombre.errors.required">
               {{'Nombre es requerido' | translate}}
             </div>
@@ -28,7 +31,7 @@
         <label for="apellido" class="col-form-label col-sm-2">{{'Apellido' | translate}}</label>
         <div class="col-sm-6">
           <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido" required #apellido="ngModel"> <!-- required -->
-          <div class="alert1 alert-danger1" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched) || apellido.invalid && clienteForm.submitted">
+          <div class="alert1 alert-danger1" *ngIf="apellido.invalid && clienteForm.submitted">
             <div *ngIf="apellido.errors.required">
               {{'Apellido es requerido' | translate}}
             </div>
@@ -40,7 +43,7 @@
         <label for="email" class="col-form-label col-sm-2">{{'Email' | translate}}</label>
         <div class="col-sm-6">
           <input type="email" class="form-control" [(ngModel)]="cliente.email" name="email" required email #email="ngModel"> <!-- required email -->
-          <div class="alert1 alert-danger1" *ngIf="email.invalid && (email.dirty || email.touched) || email.invalid && clienteForm.submitted">
+          <div class="alert1 alert-danger1" *ngIf="email.invalid && clienteForm.submitted">
             <div *ngIf="email.errors.required">
               {{'Email es requerido' | translate}}
             </div>
@@ -58,7 +61,7 @@
           <mat-datepicker-toggle [for]="miDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #miDatepicker></mat-datepicker>
 
-          <div class="alert1 alert-danger1" *ngIf="createAt.invalid && (createAt.dirty || createAt.touched) || createAt.invalid && clienteForm.submitted">
+          <div class="alert1 alert-danger1" *ngIf="createAt.invalid && clienteForm.submitted">
             <div *ngIf="createAt.errors.required">
               {{'Fecha es requerida' | translate}}
             </div>
@@ -75,7 +78,7 @@
             <option *ngFor="let region of regiones" [ngValue]="region">{{region.nombre}}</option>
           </select>
 
-          <div class="alert1 alert-danger1" *ngIf="region.invalid && (region.dirty || region.touched) || region.invalid && clienteForm.submitted">
+          <div class="alert1 alert-danger1" *ngIf="region.invalid && clienteForm.submitted">
             <div *ngIf="region.errors.required">
               {{'Region es requerida' | translate}}
             </div>

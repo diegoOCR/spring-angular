@@ -44,6 +44,40 @@ import { ChatComponent } from './chat/chat.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { HomeComponent } from './home/home.component';
 import { EmpleadoComponent } from './empleado/empleado.component';
+import { MatButtonModule, MatCheckboxModule, MatSelectModule } from '@angular/material';
+
+
+
+import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+
+const cookieConfig:NgcCookieConsentConfig = {
+  "cookie": {
+    "domain": "localhost"
+  },
+  "position": "bottom-left",
+  "theme": "classic",
+  "palette": {
+    "popup": {
+      "background": "#000000",
+      "text": "#ffffff",
+      "link": "#ffffff"
+    },
+    "button": {
+      "background": "#f1d600",
+      "text": "#000000",
+      "border": "transparent"
+    }
+  },
+  "type": "info",
+  "content": {
+    "message": "This website uses cookies to ensure you get the best experience on our website.",
+    "dismiss": "Got it!",
+    "deny": "Refuse cookies",
+    "link": "Learn more",
+    "href": "https://cookiesandyou.com",
+    "policy": "Cookie Policy"
+  }
+};
 
 
 registerLocaleData(localeES, 'es');
@@ -100,7 +134,12 @@ const routes: Routes = [
           useFactory: HttpLoaderFactory,
           deps: [HttpClient]
       }
-    })
+    }),
+    NgcCookieConsentModule.forRoot(cookieConfig),
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [ClienteService,ContactoService, UsuarioService, SignupService, Config,
     { provide: LOCALE_ID, useValue: 'es' },

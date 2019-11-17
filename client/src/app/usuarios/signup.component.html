@@ -1,10 +1,16 @@
 <form class="border border-light p-5" #signupForm="ngForm" id="signupForm" style="width: 600px;">
 
-    <p class="h4 mb-4">{{tituloSignup | translate}}</p>
+    <p class="h4 mb-4" *ngIf="!usuario.id else elseBlockRegistrase">{{'Registrarse' | translate}}</p>
+
+    <ng-template #elseBlockRegistrase>
+      <p class="h4 mb-4">{{'Actualizar' | translate}}</p>
+    </ng-template>
 
 
-            <!-- First name -->
-            <input id="form_name" type="text" name="nombre" class="form-control" [(ngModel)]="usuario.nombre" placeholder="{{'Nombre' | translate}} *" required minlength="4" #nombre="ngModel">
+            <div class="field-wrapper">
+              <input type="text" name="nombre" [(ngModel)]="usuario.nombre" required minlength="4" #nombre="ngModel">
+              <div class="field-placeholder" *ngIf="!usuario.id"><span>{{'Nombre' | translate}} *</span></div>
+            </div>
             <div class="alert1 alert-danger1" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched) || nombre.invalid && signupForm.submitted">
               <div *ngIf="nombre.errors.required">
                 {{'Nombre es requerido' | translate}}
@@ -13,22 +19,27 @@
                 {{'Nombre debe tener al menos 4 caracteres' | translate}}
               </div>
             </div>
-            <br>
 
 
-            <input type="text" class="form-control" [(ngModel)]="usuario.apellido" placeholder="{{'Apellido' | translate}} *" name="apellido" required #apellido="ngModel"> <!-- required -->
+
+          <div class="field-wrapper">
+            <input type="text" [(ngModel)]="usuario.apellido"  name="apellido" required #apellido="ngModel"> <!-- required -->
+            <div class="field-placeholder" *ngIf="!usuario.id"><span>{{'Apellido' | translate}} *</span></div>
+          </div>
             <div class="alert1 alert-danger1" *ngIf="apellido.invalid && (apellido.dirty || apellido.touched) || apellido.invalid && signupForm.submitted">
               <div *ngIf="apellido.errors.required">
                 {{'Apellido es requerido' | translate}}
               </div>
             </div>
 
-            <br>
 
 
 
-        <!-- Last name -->
-        <input type="text" class="form-control" [(ngModel)]="usuario.username" placeholder="{{'Usuario' | translate}} *" name="username" required #username="ngModel"> <!-- required -->
+
+      <div class="field-wrapper">
+        <input type="text" [(ngModel)]="usuario.username" name="username" required #username="ngModel"> <!-- required -->
+        <div class="field-placeholder" *ngIf="!usuario.id"><span>{{'Usuario' | translate}} *</span></div>
+      </div>
         <div class="alert1 alert-danger1" *ngIf="username.invalid && (username.dirty || username.touched) || username.invalid && signupForm.submitted">
           <div *ngIf="username.errors.required">
             {{'Usuario es requerido' | translate}}
@@ -36,11 +47,12 @@
         </div>
 
 
-    <br>
 
-    <!-- E-mail -->
-    <input type="email" class="form-control" [(ngModel)]="usuario.email" placeholder="{{'Email' | translate}} *" name="email" required email #email="ngModel"> <!-- required email -->
-    <div class="alert1 alert-danger1" *ngIf="email.invalid && (email.dirty || email.touched) || email.invalid && signupForm.submitted">
+    <div class="field-wrapper">
+      <input type="email" [(ngModel)]="usuario.email" name="email" required email #email="ngModel"> <!-- required email -->
+      <div class="field-placeholder" *ngIf="!usuario.id"><span>{{'Email' | translate}} *</span></div>
+    </div>
+      <div class="alert1 alert-danger1" *ngIf="email.invalid && (email.dirty || email.touched) || email.invalid && signupForm.submitted">
       <div *ngIf="email.errors.required">
         {{'Email es requerido' | translate}}
       </div>
@@ -49,15 +61,17 @@
       </div>
     </div>
 
-    <br>
 
-    <!-- Password -->
-    <input type="password" class="form-control" [(ngModel)]="usuario.password" placeholder="{{'Password' | translate}} *" name="password" required #password="ngModel"> <!-- required -->
-    <div class="alert1 alert-danger1" *ngIf="password.invalid && (password.dirty || password.touched) || password.invalid && signupForm.submitted">
-      <div *ngIf="password.errors.required">
-        {{'contraseña es requerida' | translate}}
-      </div>
+
+    <div class="field-wrapper">
+      <input type="password" [(ngModel)]="usuario.password" name="password" required #password="ngModel"> <!-- required -->
+      <div class="field-placeholder" *ngIf="!usuario.id"><span>{{'Password' | translate}} *</span></div>
     </div>
+      <div class="alert1 alert-danger1" *ngIf="password.invalid && (password.dirty || password.touched) || password.invalid && signupForm.submitted">
+        <div *ngIf="password.errors.required">
+          {{'contraseña es requerida' | translate}}
+        </div>
+      </div>
 
     <!-- <br>
 
@@ -72,10 +86,10 @@
     <!-- <br>
     <input type="submit" class="btn btn-success btn-send" (click)='create()' value="{{'Crear usuario' | translate}}"> -->
 
-    <br>
 
 
-    <div class="form-group" *ngIf="authService.hasRole('ROLE_ADMIN')">
+
+    <!-- <div class="form-group" *ngIf="authService.hasRole('ROLE_ADMIN')">
         <select id="form_need" name="roles" class="form-control" [(ngModel)]="usuarioRol.role_id" required #roles="ngModel">
             <option [ngValue]="undefined">--- {{'selecciona un rol' | translate}} * ---</option>
             <option value="1">{{'admin' | translate}}</option>
@@ -86,9 +100,18 @@
             {{'Motivo es requerido' | translate}}
           </div>
         </div>
-    </div>
+    </div> -->
 
-  <br>
+
+    <mat-form-field>
+      <select matNativeControl class="custom-select" name="roles" class="form-control" [(ngModel)]="usuarioRol.role_id" required #roles="ngModel">
+        <option [ngValue]="undefined">{{'selecciona un rol' | translate}} *</option>
+        <option value="1">{{'admin' | translate}}</option>
+        <option value="2">{{'user' | translate}}</option>
+      </select>
+    </mat-form-field>
+
+
 
     <div class="form-group row">
       <div class="col-sm-6">

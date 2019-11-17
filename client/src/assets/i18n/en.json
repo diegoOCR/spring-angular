@@ -106,6 +106,6 @@
 	"user": "user",
 	"usuario": "user",
 	"volver": "return",
-	"{{ 'Crear Cliente' | translate }}": "",
+	"{{'Crear Cliente' | translate}}": "",
 	"Última": "Last"
 }

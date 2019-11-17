@@ -1,4 +1,4 @@
-<div class="card mx-4 my-4">
+<!-- <div class="card mx-4 my-4">
   <div class="card-header">
     <ul class="nav nav-pills-card-header-pills">
 
@@ -13,6 +13,42 @@
         <button class="btn btn-warning" type="button" (click)="desconectar()" *ngIf="conectado">{{'Desconectar' | translate}}</button>
       </li>
     </ul>
+  </div>
+  </div> -->
+
+
+  <div class="card mx-4 my-4">
+    <!-- <div class="card-header">
+      <ul class="nav nav-pills-card-header-pills">
+
+        <li class="nav-item mr-2" *ngIf="!conectado">
+          <div class="field-wrapper">
+              <input type="text" name="username" [(ngModel)]="mensaje.username">
+              <div class="field-placeholder"><span>{{'Tu username' | translate}} *</span></div>
+          </div>
+        </li>
+
+        <li class="nav-item mr-2">
+          <button class="btn btn-success" type="button" (click)="conectar()" *ngIf="!conectado" [disabled]="!mensaje.username">{{'Conectar' | translate}}</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-warning" type="button" (click)="desconectar()" *ngIf="conectado">{{'Desconectar' | translate}}</button>
+        </li>
+      </ul>
+    </div> -->
+
+
+  <div class="card-header">
+    <div class="contentContainerLeft" *ngIf="!conectado">
+      <div class="field-wrapper">
+          <input type="text" name="username" [(ngModel)]="mensaje.username">
+          <div class="field-placeholder"><span>{{'Tu username' | translate}} *</span></div>
+      </div>
+      </div>
+    <div class="contentContainerRight">
+      <button class="btn btn-success btn-loggin" type="button" (click)="conectar()" *ngIf="!conectado" [disabled]="!mensaje.username">{{'Conectar' | translate}}</button>
+      <button class="btn btn-warning btn-loggin" type="button" (click)="desconectar()" *ngIf="conectado">{{'Desconectar' | translate}}</button>
+    </div>
   </div>
 
   <div #scrollChat [scrollTop]="scrollChat.scrollHeight" class="card-body" style="overflow-y: scroll; height: 560px;" *ngIf="conectado">

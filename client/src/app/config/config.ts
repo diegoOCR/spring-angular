@@ -1,5 +1,5 @@
 import * as $ from 'jquery';
-import { OnInit } from '@angular/core';
+
 
 export const URL_BACKEND = 'https://spring-angular-mysql.herokuapp.com';
 

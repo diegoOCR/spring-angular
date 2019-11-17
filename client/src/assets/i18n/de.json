@@ -59,7 +59,7 @@
 	"No hay líneas asignadas para la factura. Debe agregar al menos una!": "Der Rechnung sind keine Zeilen zugeordnet. Sie müssen mindestens eine hinzufügen!",
 	"No hay registros en la base de datos!": "Es sind keine Datensätze in der Datenbank!",
 	"No tiene observación": "Es hat keine Bemerkung",
-	"Nombre": "Name",
+	"Nombre": "Vorname",
 	"Nombre debe tener al menos 4 caracteres": "Name muss mindestens 4 Buchstabe haben",
 	"Nombre es requerido": "Name ist erforderlich",
 	"Nueva Factura": "Neue Rechnung",
@@ -97,7 +97,7 @@
 	"email": "E-mail",
 	"fecha": "Datum",
 	"folio": "Folio",
-	"nombre": "Name",
+	"nombre": "Vorname",
 	"progreso": "Fortschritt",
 	"selecciona un rol": "Wählen Sie eine Rolle aus",
 	"selecionar una región": "Wählen Sie eine Region aus",
@@ -106,6 +106,6 @@
 	"user": "Benutzer",
 	"usuario": "Benutzername",
 	"volver": "zurück",
-	"{{ 'Crear Cliente' | translate }}": "",
+	"{{'Crear Cliente' | translate}}": "",
 	"Última": "letzte"
 }

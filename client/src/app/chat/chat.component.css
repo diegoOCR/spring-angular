@@ -1,0 +1,25 @@
+.container{
+  /* width: 70%; */
+}
+
+.contentContainerLeft{
+  width: 27%;
+  float: left;
+}
+
+.contentContainerRight{
+  width: 15%;
+  float: left;
+  margin-left: 2%;
+  margin-top: 1.7%;
+}
+
+
+.field-wrapper{
+   position: relative;
+   margin-bottom: 0px;
+ }
+
+ .btn-loggin{
+   margin-bottom: 0px;
+ }

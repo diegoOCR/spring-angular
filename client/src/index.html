@@ -7,6 +7,7 @@
   <meta charset="utf-8">
   <title>Spring-Angular</title>
   <base href="/">
+  <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script type="text/javascript">
@@ -18,6 +19,12 @@
        window.kommunicate = m; m._globals = kommunicateSettings;
      })(document, window.kommunicate || {});
   </script>
+
+  <!-- 1. Configure SystemJS -->
+  <script src="system.config.js"></script>
+    <!-- 2. Add cookieconsent dependency-->
+    <link rel="stylesheet" type="text/css" href="node_modules/cookieconsent/build/cookieconsent.min.css"/>
+  <script src="node_modules/cookieconsent/build/cookieconsent.min.js"></script>
 </head>
 <body>
 

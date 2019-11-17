@@ -1,5 +1,16 @@
 .alert1 {
     position: relative;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-danger1 {
+    color: #ed1c24;
+}
+
+
+.alert2 {
+    position: relative;
     padding: 0.40rem 1rem;
     margin-bottom: 1rem;
     border: 1px solid transparent;
@@ -7,8 +18,26 @@
     margin-top: 0.1rem;
 }
 
-.alert-danger1 {
-    color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched {
+  border: 2px solid red;
+}
+
+
+input.ng-invalid[required], input.ng-invalid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+input.ng-valid.ng-touched {
+  /* border: 1px solid green; */
+}
+
+
+.mat-form-field{
+  width: 206px;
+}
+
+
+.form-group {
+    margin-bottom: 2rem;
 }
