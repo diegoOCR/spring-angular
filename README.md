@@ -20,7 +20,7 @@ Mit der User: admin und Password: 12345 können Sie alle verfügbaren Funktionen
 
 # Back-End
 - Token-basierte Sicherheit (mit Spring-Sicherheit)
-- Datenbank mit MySQL (und MongoDB für die CHAT)
+- Datenbank mit MySQL
 - Verwenden der JPA- und JDBC-Vorlage, um mit der relationalen Datenbank zu kommunizieren
 
 # Front-End
