@@ -13,7 +13,7 @@ Mit der User: admin und Password: 12345 können Sie alle verfügbaren Funktionen
 | Frontend         | Angular 5      |
 | Security         | Token Based (Spring Security and JWT )     |
 | CSS              | Bootstrap  |
-| Datenbank        | MySQL und MongoDB
+| Datenbank        | MySQL
 
 
 
