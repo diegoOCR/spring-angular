@@ -35,11 +35,11 @@ Mit der User: admin und Password: 12345 können Sie alle verfügbaren Funktionen
 Was kann man machen:
 
 # Admin
-- Benutzer managen (Create, Read, Update, Delete). 
-- Kunden managen (CRUD).
-- Rechnungen  managen (CRUD), wenn man ein Kunde löscht alle seine.
+- Benutzer verwalten (Create, Read, Update, Delete). 
+- Kunden verwalten (CRUD).
+- Rechnungen  verwalten (CRUD), wenn man ein Kunde löscht alle seine.
 - Rechnungen werden kaskadierend löschen.   
-- Produkte managen (CRUD).
+- Produkte verwalten (CRUD).
 - Kontaktformular ausfüllen und eine Kopie an eigene E-mail bekommen.
 - Die Chat benutzen.
 
@@ -47,4 +47,5 @@ Was kann man machen:
 - Kunden-Info sehen
 - Kontaktformular ausfüllen und eine Kopie an eigene E-mail bekommen.
 - Chat Benutzen
+- 3 Sprachen wählen.
 
