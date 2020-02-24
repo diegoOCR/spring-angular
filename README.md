@@ -9,8 +9,8 @@ Mit der User: admin und Password: 12345 können Sie alle verfügbaren Funktionen
 
 | Component        | Technology     
 | -------------    |:-------------:|
-| Backend (REST)   | Spring Boot (Java)|
-| Frontend         | Angular 5      |
+| Backend (REST)   | Spring Boot 5(Java)|
+| Frontend         | Angular 8      |
 | Security         | Token Based (Spring Security and JWT )     |
 | CSS              | Bootstrap  |
 | Datenbank        | MySQL
