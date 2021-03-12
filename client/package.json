@@ -33,7 +33,7 @@
     "core-js": "^2.5.7",
     "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.3.1",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.2.8",
     "moment": "^2.22.2",
     "ng-pdf-make": "^0.1.1",
